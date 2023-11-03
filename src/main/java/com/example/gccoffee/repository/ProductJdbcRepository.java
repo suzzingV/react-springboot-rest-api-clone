@@ -2,6 +2,7 @@ package com.example.gccoffee.repository;
 
 import com.example.gccoffee.model.Category;
 import com.example.gccoffee.model.Product;
+import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -42,7 +43,16 @@ public class ProductJdbcRepository implements ProductRepository {
 
     @Override
     public Product update(Product product) {
-        return null;
+        int update = jdbcTemplate.update(
+                "update products set product_name = :productName, category = :category, price = :price, description = :description, created_at = :createdAt, updated_at = :updatedAt " +
+                        "where product_id = UUID_TO_BIN(:productId)",
+                toParamMap(product)
+        );
+
+        if(update != 1) {
+            throw new RuntimeException("Nothing was updated");
+        }
+        return product;
     }
 
     @Override
@@ -62,7 +72,7 @@ public class ProductJdbcRepository implements ProductRepository {
         try {
             return Optional.of(
                     jdbcTemplate.queryForObject("select * from products where product_name = :productName",
-                            Collections.singletonMap("productId", productName), productRowMapper)
+                            Collections.singletonMap("productName", productName), productRowMapper)
             );
         } catch(EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -79,7 +89,7 @@ public class ProductJdbcRepository implements ProductRepository {
 
     @Override
     public void deleteAll() {
-        jdbcTemplate.getJdbcOperations().execute("delete from products");
+        jdbcTemplate.update("delete from products", Collections.emptyMap());
     }
 
     private static final RowMapper<Product> productRowMapper = (resultSet, i) -> {
