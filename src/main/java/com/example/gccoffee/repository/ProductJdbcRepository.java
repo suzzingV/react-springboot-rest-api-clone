@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.nio.ByteBuffer;
 import java.sql.Timestamp;
@@ -17,7 +18,8 @@ import java.util.*;
 import static com.example.gccoffee.Utils.toLocalDateTime;
 import static com.example.gccoffee.Utils.toUUID;
 
-@Component
+@Repository
+@Profile({"prod", "test"})
 public class ProductJdbcRepository implements ProductRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
