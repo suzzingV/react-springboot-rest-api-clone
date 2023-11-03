@@ -9,16 +9,16 @@ public class Product {
     private Category category;
     private long price;
     private String description;
-    private final LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    private final LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Product(UUID productId, String productName, Category category, long price) {
         this.productId = productId;
         this.productName = productName;
         this.category = category;
         this.price = price;
-        this.createAt = LocalDateTime.now();
-        this.updateAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
     public Product(UUID productId, String productName, Category category, long price, String description, LocalDateTime createAt, LocalDateTime updateAt) {
         this.productId = productId;
@@ -26,8 +26,8 @@ public class Product {
         this.category = category;
         this.price = price;
         this.description = description;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
+        this.createdAt = createAt;
+        this.updatedAt = updateAt;
     }
 
     public UUID getProductId() {
@@ -50,12 +50,12 @@ public class Product {
         return description;
     }
 
-    public LocalDateTime getCreateAt() {
-        return createAt;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public LocalDateTime getUpdateAt() {
-        return updateAt;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     public void setProductName(String productName) {
@@ -64,16 +64,16 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void setPrice(long price) {
         this.price = price;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void setDescription(String description) {
         this.description = description;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 }

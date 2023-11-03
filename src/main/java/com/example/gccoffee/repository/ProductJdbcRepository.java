@@ -4,15 +4,10 @@ import com.example.gccoffee.model.Category;
 import com.example.gccoffee.model.Product;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.nio.ByteBuffer;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.*;
 
 import static com.example.gccoffee.Utils.toLocalDateTime;
@@ -112,8 +107,8 @@ public class ProductJdbcRepository implements ProductRepository {
         paramMap.put("category", product.getCategory().toString());
         paramMap.put("price", product.getPrice());
         paramMap.put("description", product.getDescription());
-        paramMap.put("createdAt", product.getCreateAt());
-        paramMap.put("updatedAt", product.getUpdateAt());
+        paramMap.put("createdAt", product.getCreatedAt());
+        paramMap.put("updatedAt", product.getUpdatedAt());
         return paramMap;
     }
 }
