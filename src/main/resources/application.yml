@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: test
+    active: prod
 ---
 spring:
   config:
@@ -8,7 +8,7 @@ spring:
       on-profile: test
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gc-coffee?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/gc-coffee-test?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: suzzingV1999@
 
