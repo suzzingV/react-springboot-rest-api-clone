@@ -24,11 +24,11 @@ public class OrderJdbcRepository implements OrderRepository {
     @Transactional
     public Order insert(Order order) {
         jdbcTemplate.update("INSERT into orders(order_id, email, address, postcode, order_status, created_at, updated_at) " +
-                "values (UUID_TO_BIN(:orderId), :email, :address, :postcode, :orderStatus, :createdAt, :updatedAt",
+                "values (UUID_TO_BIN(:orderId), :email, :address, :postcode, :orderStatus, :createdAt, :updatedAt)",
                 toOrderParamMap(order));
-        order.getOrderItems().forEach(item -> jdbcTemplate.update("insert into order_items(order_id, product_id, category, price, quantity, createdAt, updatedAt)" +
+        order.getOrderItems().forEach(item -> jdbcTemplate.update("insert into order_items(order_id, product_id, category, price, quantity, created_at, updated_at)" +
                 "values (UUID_TO_BIN(:orderId), UUID_TO_BIN(:productId), :category, :price, :quantity, :createdAt, :updatedAt)",
-                toOrderItemParamMap(order.getOrderId(), order.getCreateAt(), order.getUpdateAt(), item)));
+                toOrderItemParamMap(order.getOrderId(), order.getCreatedAt(), order.getUpdatedAt(), item)));
         return order;
     }
 
@@ -39,8 +39,8 @@ public class OrderJdbcRepository implements OrderRepository {
         paramMap.put("address", order.getAddress());
         paramMap.put("postcode", order.getPostcode());
         paramMap.put("orderStatus", order.getOrderStatus().toString());
-        paramMap.put("createdAt", order.getCreateAt());
-        paramMap.put("updatedAt", order.getUpdateAt());
+        paramMap.put("createdAt", order.getCreatedAt());
+        paramMap.put("updatedAt", order.getUpdatedAt());
         return paramMap;
     }
 
@@ -49,7 +49,7 @@ public class OrderJdbcRepository implements OrderRepository {
 
         paramMap.put("orderId", orderId.toString().getBytes());
         paramMap.put("productId", item.productId().toString().getBytes());
-        paramMap.put("category", item.category());
+        paramMap.put("category", item.category().toString());
         paramMap.put("price", item.price());
         paramMap.put("quantity", item.quantity());
         paramMap.put("createdAt", createdAt);

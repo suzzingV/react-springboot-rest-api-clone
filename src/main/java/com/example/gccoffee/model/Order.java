@@ -11,8 +11,8 @@ public class Order {
     private String postcode;
     private final List<OrderItem> orderItems;
     private OrderStatus orderStatus;
-    private final LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    private final LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Order(UUID orderId, Email email, String address, String postcode, List<OrderItem> orderItems, OrderStatus orderStatus, LocalDateTime createAt, LocalDateTime updateAt) {
         this.orderId = orderId;
@@ -21,8 +21,8 @@ public class Order {
         this.postcode = postcode;
         this.orderItems = orderItems;
         this.orderStatus = orderStatus;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
+        this.createdAt = createAt;
+        this.updatedAt = updateAt;
     }
 
     public UUID getOrderId() {
@@ -49,26 +49,26 @@ public class Order {
         return orderStatus;
     }
 
-    public LocalDateTime getCreateAt() {
-        return createAt;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public LocalDateTime getUpdateAt() {
-        return updateAt;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     public void setAddress(String address) {
         this.address = address;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 }

@@ -34,7 +34,7 @@ function App() {
             <ProductList products= {products} onAddClick={handleAddClicked}/>
           </div>
           <div className="col-md-4 summary p-4">
-            <Summary/>
+            <Summary items = {items}/>
           </div>
         </div>
       </div>
